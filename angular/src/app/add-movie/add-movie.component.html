@@ -1,0 +1,17 @@
+<table>
+    <tbody>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" [formControl]="nameFormControl"/></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" [formControl]="descriptionFormControl"/></td>
+        </tr>
+        <tr>
+            <td>Release Date:</td>
+            <td><input type="date" [formControl]="releaseDateFormControl"/></td>
+        </tr>
+    </tbody>
+</table>
+<button (click)="addMovie()">Add Movie</button>
