@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class MovieService {
 
-    movie_url = "http://localhost:8000/movie";
+    movie_url = environment.production? "http://test.korangle.com:8000/movie" : "http://localhost:8000/movie";
     get_movie_list_url = "/get-movie-list";
     add_movie_url = "/add-movie";
     
