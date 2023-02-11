@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
 @Injectable()
 export class MovieService {
 
-    movie_url = environment.production? "http://test.korangle.com:8000/movie" : "http://localhost:8000/movie";
+    movie_url = environment.production? "http://ec2-52-22-130-120.compute-1.amazonaws.com:8000/movie" : "http://localhost:8000/movie";
     get_movie_list_url = "/get-movie-list";
     add_movie_url = "/add-movie";
     
