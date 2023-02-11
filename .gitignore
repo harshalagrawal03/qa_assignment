@@ -1,4 +1,9 @@
 angular/.editorconfig
 angular/node_modules
 angular/src/environments/environment.ts
+angular/build
+angular/build.zip
+angular/prepareBuild.sh
+backend/db.sqlite3
+backend/.*pyc
 env

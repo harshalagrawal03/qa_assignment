@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, shareReplay } from 'rxjs/internal/operators';
 import { MovieService } from '../movie.service';
@@ -17,7 +18,8 @@ export class MovieListComponent implements OnInit {
 
     searchMovieFormControl = new FormControl('');
 
-    constructor(private movieService: MovieService) {}
+    constructor(private movieService: MovieService,
+        private router: Router) {}
 
     ngOnInit(): void {
         this.movieList$ = this.movieService.getMovieList();

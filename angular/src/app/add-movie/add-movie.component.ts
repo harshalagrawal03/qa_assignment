@@ -28,8 +28,14 @@ export class AddMovieComponent implements OnInit {
         }
         this.movieService.addMovie(data).subscribe( (data) => {
             console.log(data);
-            alert('Movie Update Successfully');
+            alert('Movie added Successfully');
         });
+    }
+
+    reset(): void {
+        this.nameFormControl.setValue(null);
+        this.descriptionFormControl.setValue(null);
+        this.releaseDateFormControl.setValue(null);
     }
 
 }
