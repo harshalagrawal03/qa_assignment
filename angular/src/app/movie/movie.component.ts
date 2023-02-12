@@ -12,6 +12,7 @@ import { MovieService } from '../movie.service';
 export class MovieComponent implements OnInit {
 
     movieData: any;
+    username: any;
 
     nameFormControl = new FormControl();
     descriptionFormControl = new FormControl();
@@ -22,8 +23,11 @@ export class MovieComponent implements OnInit {
         private router: Router) { }
 
     ngOnInit() {
+        this.route.parent.paramMap.subscribe((params: Params) => {
+            this.username = params.get('username');
+        })
         this.route.paramMap.subscribe((params: Params) => {
-            this.movieService.getMovie(params.get('id')).subscribe(movie => {
+            this.movieService.getMovie(params.get('movieId')).subscribe(movie => {
                 this.movieData = movie[0];
                 this.nameFormControl.setValue(movie[0].fields.name);
                 this.descriptionFormControl.setValue(movie[0].fields.description);
@@ -48,14 +52,13 @@ export class MovieComponent implements OnInit {
     delete(): void {
         this.movieService.deleteMovie(this.movieData.pk).subscribe( (data) => {
             alert('Movie deleted Successfully');
-            this.router.navigate(['/movie-list'])
+            this.router.navigate(['movie-list'], { relativeTo: this.route.parent});
         });
     }
 
     reset(): void {
         this.nameFormControl.setValue(this.movieData.fields.name);
         this.descriptionFormControl.setValue(this.movieData.fields.description);
-        this.releaseDateFormControl.setValue(this.movieData.fields.release_date);
     }
 
 }

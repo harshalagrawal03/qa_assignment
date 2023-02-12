@@ -8,13 +8,17 @@ import { MovieListComponent } from './movie-list/movie-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import { MovieComponent } from './movie/movie.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieListComponent,
     AddMovieComponent,
-    MovieComponent
+    MovieComponent,
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

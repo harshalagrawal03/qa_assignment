@@ -1,0 +1,3 @@
+<input type="number" placeholder="Type in 10 digit mobile no." [formControl]="usernameFormControl"/><br/>
+<a *ngIf="!usernameFormControl.invalid" [routerLink]="['../dashboard', usernameFormControl.value]" routerLinkActive="active">Submit</a>
+<span *ngIf="usernameFormControl.invalid">Type in 10 digit mobile number</span><br/>

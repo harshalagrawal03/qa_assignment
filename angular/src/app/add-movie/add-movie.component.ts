@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute, ParamMap, Params } from '@angular/router';
 import { MovieService } from '../movie.service';
 
 @Component({
@@ -10,14 +11,18 @@ import { MovieService } from '../movie.service';
 })
 export class AddMovieComponent implements OnInit {
 
+    username: number;
     nameFormControl = new FormControl();
     descriptionFormControl = new FormControl();
     releaseDateFormControl = new FormControl();
 
-    constructor(public movieService: MovieService) { }
+    constructor(public movieService: MovieService,
+        private route: ActivatedRoute) { }
 
     ngOnInit() {
-        
+        this.route.parent.paramMap.subscribe((params: Params) => {
+            this.username = params.get('username');
+        });
     }
 
     addMovie(): void {
@@ -26,8 +31,7 @@ export class AddMovieComponent implements OnInit {
             description: this.descriptionFormControl.value,
             release_date: this.releaseDateFormControl.value
         }
-        this.movieService.addMovie(data).subscribe( (data) => {
-            console.log(data);
+        this.movieService.addMovie(this.username, data).subscribe( (data) => {
             alert('Movie added Successfully');
         });
     }

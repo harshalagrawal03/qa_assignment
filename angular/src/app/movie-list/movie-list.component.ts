@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, shareReplay } from 'rxjs/internal/operators';
 import { MovieService } from '../movie.service';
@@ -19,22 +19,24 @@ export class MovieListComponent implements OnInit {
     searchMovieFormControl = new FormControl('');
 
     constructor(private movieService: MovieService,
-        private router: Router) {}
+        private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.movieList$ = this.movieService.getMovieList();
-        this.filteredMovieList$ = combineLatest([
-            this.movieList$,
-            this.searchMovieFormControl.valueChanges.pipe(startWith(this.searchMovieFormControl.value))
-        ]).pipe(
-            map(([movieList, searchTerm]) => {
-                return movieList.filter(movie => {
-                    return (movie && movie.fields.name.indexOf(searchTerm) != -1);
-                });
-            }),
-            startWith([]),
-            shareReplay(),
-        );
+        this.route.parent.paramMap.subscribe((params: Params) => {
+            this.movieList$ = this.movieService.getMovieList(params.get('username'));
+            this.filteredMovieList$ = combineLatest([
+                this.movieList$,
+                this.searchMovieFormControl.valueChanges.pipe(startWith(this.searchMovieFormControl.value))
+            ]).pipe(
+                map(([movieList, searchTerm]) => {
+                    return movieList.filter(movie => {
+                        return (movie && movie.fields.name.indexOf(searchTerm) != -1);
+                    });
+                }),
+                startWith([]),
+                shareReplay(),
+            );
+        })
     }
 
 }

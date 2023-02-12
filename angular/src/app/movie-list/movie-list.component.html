@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let movie of filteredMovieList$ | async">
-                <td><a [routerLink]="['/movie', movie.pk]" routerLinkActive="active">{{movie.fields.name}}</a></td>
+                <td><a [routerLink]="['../movie', movie.pk]" routerLinkActive="active">{{movie.fields.name}}</a></td>
                 <td>{{movie.fields.description}}</td>
                 <td>{{movie.fields.release_date}}</td>
             </tr>

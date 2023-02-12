@@ -13,12 +13,13 @@ export class MovieService {
     
     constructor(private http: HttpClient) { }
 
-    getMovieList(): Observable<any> {
-        return this.http.get(this.movie_url+this.get_movie_list_url);
+    getMovieList(username: number): Observable<any> {
+        console.log(username);
+        return this.http.get(this.movie_url+this.get_movie_list_url+"/"+username);
     }
 
-    addMovie(data: any): Observable<any> {
-        return this.http.post(this.movie_url+this.add_movie_url,data);
+    addMovie(username: number, data: any): Observable<any> {
+        return this.http.post(this.movie_url+this.add_movie_url+"/"+username,data);
     }
 
     getMovie(movieId: number): Observable<any> {
